@@ -3,19 +3,19 @@
     {
       "icon": "Code",
       "title": "Programming Languages",
-      "skills": ["Java", "Python", "JavaScript", "C", "SQL"],
+      "skills": ["Java", "Python", "C", "C++", "JavaScript", "TypeScript", "HTML", "CSS"],
       "color": "from-blue-500/20 to-blue-600/20"
     },
     {
       "icon": "Server",
       "title": "Backend Technologies",
-      "skills": ["Spring Boot", "Spring MVC", "Spring Security", "JPA/Hibernate", "RESTful APIs", "Node.js", "Express.js", "FastAPI"],
+      "skills": ["Spring Boot", "Spring MVC", "Spring Security", "JPA/Hibernate", "RESTful APIs", "Node.js"],
       "color": "from-green-500/20 to-green-600/20"
     },
     {
       "icon": "Database",
       "title": "Databases",
-      "skills": ["PostgreSQL", "MySQL", "MongoDB", "Query Optimization", "JDBC", "Mongoose", "Database Design"],
+      "skills": ["PostgreSQL", "MySQL", "MongoDB", "JDBC"],
       "color": "from-purple-500/20 to-purple-600/20"
     },
     {

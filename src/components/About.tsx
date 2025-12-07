@@ -1,14 +1,63 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Mail, Phone, Award, User, Code2, Target } from 'lucide-react';
 
+interface ContactItem {
+  icon: string;
+  text: string;
+  color: string;
+}
+
+interface AboutData {
+  achievements: string[];
+  contact: ContactItem[];
+}
+
 const About = () => {
-  const achievements = [
-    "ISC School Topper & House Captain 2021–2022",
-    "Top 5% performer & Silver Certification in NPTEL",
-    "Organized a college-level Table Tennis Tournament",
-    "B.Tech SGPA: 9.11"
-  ];
+  const [aboutData, setAboutData] = useState<AboutData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  const iconMap: Record<string, React.ElementType> = {
+    MapPin,
+    Mail,
+    Phone,
+    Award,
+  };
+
+  useEffect(() => {
+    fetch('/config/about.json')
+      .then(res => res.json())
+      .then(data => {
+        setAboutData(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Error loading about config:', err);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return (
+      <section id="about" className="py-20 bg-gradient-to-br from-gray-900 via-slate-900 to-gray-800 flex items-center justify-center min-h-screen">
+        <div className="text-gray-400">Loading about section...</div>
+      </section>
+    );
+  }
+
+  if (!aboutData) {
+    return (
+      <section id="about" className="py-20 bg-gradient-to-br from-gray-900 via-slate-900 to-gray-800 flex items-center justify-center min-h-screen">
+        <div className="text-red-400">Error loading about data</div>
+      </section>
+    );
+  }
+
+  const achievements = aboutData.achievements;
+  const contactItems = aboutData.contact.map(item => ({
+    ...item,
+    icon: iconMap[item.icon]
+  }));
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -139,7 +188,7 @@ const About = () => {
             >
               <User className="text-blue-400" size={28} />
               <h3 className="text-3xl font-semibold text-white">
-                Full Stack Developer & Problem Solver
+                {aboutData?.achievements ? 'Key Achievements' : 'Full Stack Developer & Problem Solver'}
               </h3>
             </motion.div>
             
@@ -147,7 +196,7 @@ const About = () => {
               className="text-gray-300 mb-6 leading-relaxed text-lg"
               variants={itemVariants}
             >
-              I'm a highly motivated Computer Science undergraduate specializing in Java backend development. 
+              I'm a highly motivated Computer Science professional specializing in Java backend development. 
               My passion lies in designing, developing, and deploying robust web applications using modern technologies 
               like Spring Boot, React, and various databases.
             </motion.p>
@@ -165,19 +214,14 @@ const About = () => {
               className="grid sm:grid-cols-2 gap-4 mb-8"
               variants={containerVariants}
             >
-              {[
-                { icon: MapPin, text: "Kolkata, India", color: "text-blue-400" },
-                { icon: Mail, text: "msaswata15@gmail.com", color: "text-green-400" },
-                { icon: Phone, text: "+91 7718511341", color: "text-purple-400" },
-                { icon: Award, text: "Graduating 2026", color: "text-orange-400" }
-              ].map((item, index) => (
+              {contactItems.map((item, index) => (
                 <motion.div
                   key={index}
                   className="flex items-center gap-3 text-gray-300 p-3 rounded-lg hover:bg-gray-800/50 transition-all duration-300"
                   variants={itemVariants}
                   whileHover={{ scale: 1.05, x: 5 }}
                 >
-                  <item.icon className={item.color} size={20} />
+                  {item.icon && <item.icon className={item.color} size={20} />}
                   <span>{item.text}</span>
                 </motion.div>
               ))}

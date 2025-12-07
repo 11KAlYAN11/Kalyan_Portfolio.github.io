@@ -1,37 +1,42 @@
 {
   "personal": {
-    "name": "Saswata Mondal",
-    "title": "Full Stack Developer & Problem Solver",
-    "tagline": "Building robust web applications with modern technologies",
-    "bio": "I'm a highly motivated Computer Science undergraduate specializing in Java backend development. My passion lies in designing, developing, and deploying robust web applications using modern technologies like Spring Boot, React, and various databases.",
-    "aboutText": "With demonstrated expertise in building scalable backend systems, optimizing database performance, and integrating secure services, I bring strong problem-solving skills and a collaborative mindset to every project. I'm always eager to learn new technologies and tackle challenging development environments.",
-    "location": "Kolkata, India",
-    "email": "msaswata15@gmail.com",
-    "phone": "+91 7718511341",
-    "graduationYear": 2026
+    "name": "Asam Pavan Kumar Reddy",
+    "title": "Java Full Stack Developer, DevOps Engineer & Problem Solver",
+    "tagline": "Building robust Java and web applications with modern technologies",
+    "bio": "I'm a highly motivated Java Full-Stack Developer. My passion lies in designing, developing, and deploying robust and scalable applications using modern technologies like Java, Python, Spring Boot, React, and various databases.",
+    "aboutHeading": "Full Stack Developer & Problem Solver",
+    "aboutDescription1": "I'm a highly motivated Computer Science professional specializing in Java backend development. My passion lies in designing, developing, and deploying robust web applications using modern technologies like Spring Boot, React, and various databases.",
+    "aboutDescription2": "With demonstrated expertise in building scalable backend systems, optimizing database performance, and integrating secure services, I bring strong problem-solving skills and a collaborative mindset to every project. I'm always eager to learn new technologies and tackle challenging development environments.",
+    "location": "Bangluru, India",
+    "email": "programmer143143@gmail.com",
+    "phone": "+91 XXXXX XXXXX",
+    "graduationYear": 2023
   },
   "social": {
-    "github": "https://github.com/msaswata15",
-    "linkedin": "https://linkedin.com/in/saswata-mondal",
-    "twitter": "@msaswata15",
-    "portfolio": "https://saswatamondal.me/",
+    "github": "https://github.com/11KAlYAN11",
+    "linkedin": "https://www.linkedin.com/in/asam-pavan-kumar-reddy/",
+    "twitter": "@xxxx",
+    "portfolio": "https://kalyan-portfolio-weld.vercel.app/",
     "instagram": ""
   },
   "seo": {
-    "title": "Saswata Mondal | Full Stack Developer in Kolkata, India",
-    "description": "Saswata Mondal – Full Stack Developer in Kolkata, India. Expert in Java, JavaScript, React, and Spring Boot. View my projects, resume, and contact me for collaboration!",
-    "keywords": "Saswata Mondal, Full Stack Developer, Java, JavaScript, React, Spring Boot, Kolkata, India, Portfolio, Resume, Web Developer, Software Engineer, IEM Kolkata",
-    "author": "Saswata Mondal",
-    "domain": "saswatamondal.me",
+    "title": "Asam Pavan Kumar Reddy | Full Stack Developer in Banglore, India",
+    "description": "Asam Pavan Kumar Reddy – Java Full Stack Developer in Banglore, India. Expert in Java, Python, C, and Spring Boot. View my projects, resume, and contact me for collaboration!",
+    "keywords": "Asam Pavan Kumar Reddy, Java Full Stack Developer, Java, JavaScript, React, Spring Boot, Banglore, India, Portfolio, Resume, Software Engineer",
+    "author": "Asam Pavan Kumar Reddy",
+    "domain": "Asam Pavan Kumar Reddy.me",
     "imageUrl": "https://saswatamondal.me/preview-image.jpg",
     "twitterHandle": "@msaswata15",
     "googleSiteVerification": "google130aa423e5da48f5.html"
   },
   "education": {
     "institution": "RGMCET",
-    "degree": "B.Tech in Computer Science",
-    "college": "Institute of Engineering and Management, Kolkata",
-    "collegeAlumni": "IEM Kolkata"
+    "degree": "B.Tech Electronics and Communication Engineering",
+    "college": "Rajeev Gandhi Memorial College of Engineering and Technology",
+    "collegeAlumni": "RGMCET Alumni Association",
+    "location": "Nandyal, Andhra Pradesh, India",
+    "graduationYear": 2023,
+    "institutionWebsite": "https://rgmcet.edu.in/"
   },
   "contact": {
     "emailService": {
@@ -40,6 +45,6 @@
       "serviceIdEnv": "VITE_EMAILJS_SERVICE_ID",
       "templateIdEnv": "VITE_EMAILJS_TEMPLATE_ID"
     },
-    "fallbackEmail": "msaswata15@gmail.com"
+    "fallbackEmail": "programmer143143@gmail.com"
   }
 }

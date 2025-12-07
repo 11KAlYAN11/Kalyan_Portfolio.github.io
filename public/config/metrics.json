@@ -1,0 +1,37 @@
+{
+  "metrics": [
+    {
+      "id": "1",
+      "label": "Projects Completed",
+      "value": 25,
+      "suffix": "+",
+      "icon": "Activity",
+      "color": "from-blue-500 to-cyan-500"
+    },
+    {
+      "id": "2",
+      "label": "Years Experience",
+      "value": 3,
+      "suffix": "+",
+      "icon": "Clock",
+      "color": "from-green-500 to-emerald-500"
+    },
+    {
+      "id": "3",
+      "label": "GitHub Repositories",
+      "value": 27,
+      "suffix": "+",
+      "icon": "Zap",
+      "color": "from-purple-500 to-pink-500"
+    },
+    {
+      "id": "4",
+      "label": "Code Commits",
+      "value": 1000,
+      "suffix": "",
+      "icon": "TrendingUp",
+      "color": "from-orange-500 to-red-500",
+      "displayAsK": true
+    }
+  ]
+}

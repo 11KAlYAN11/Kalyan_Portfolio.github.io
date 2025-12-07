@@ -1,58 +1,66 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { GraduationCap, Trophy, Calendar, BookOpen, Award, Star, Briefcase } from 'lucide-react';
 
+const iconMap: Record<string, React.ElementType> = {
+  GraduationCap,
+  Trophy,
+  Briefcase,
+};
+
+interface TimelineItem {
+  id: number;
+  type: "experience" | "education" | "achievement";
+  title: string;
+  institution: string;
+  period: string;
+  details: string;
+  icon: string;
+  iconColor: string;
+}
+
+interface EducationData {
+  timeline: TimelineItem[];
+  achievements: string[];
+}
+
 const Education = () => {
-  const timeline = [
-    {
-      type: "experience",
-      title: "Data Science Intern",
-      institution: "Sabudh Foundation (in collaboration with STPI)",
-      period: "July 2025 - Present",
-      details: "Working on data science projects and machine learning applications in collaboration with Software Technology Parks of India (STPI)",
-      icon: <Briefcase className="text-green-400" size={20} />
-    },
-    {
-      type: "education",
-      title: "B.Tech in Computer Science",
-      institution: "Institute of Engineering & Management, Kolkata",
-      period: "2022 - 2026",
-      details: "SGPA: 9.11",
-      icon: <GraduationCap className="text-blue-400" size={20} />
-    },
-    {
-      type: "education", 
-      title: "ISC (Class 12)",
-      institution: "The Assembly of God Church School, Haldia",
-      period: "2022",
-      details: "94.75%",
-      icon: <GraduationCap className="text-blue-400" size={20} />
-    },
-    {
-      type: "education",
-      title: "ICSE (Class 10)", 
-      institution: "The Assembly of God Church School, Haldia",
-      period: "2020",
-      details: "92.4%",
-      icon: <GraduationCap className="text-blue-400" size={20} />
-    },
-    {
-      type: "achievement",
-      title: "ISC School Topper & House Captain",
-      institution: "The Assembly of God Church School",
-      period: "2021-2022",
-      details: "Leadership and Academic Excellence",
-      icon: <Trophy className="text-yellow-400" size={20} />
-    },
-    {
-      type: "achievement",
-      title: "NPTEL Silver Certification",
-      institution: "Top 5% Performer",
-      period: "2023",
-      details: "Multiple courses in Programming and Data Science",
-      icon: <Trophy className="text-yellow-400" size={20} />
-    }
-  ];
+  const [educationData, setEducationData] = useState<EducationData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/config/education.json')
+      .then(res => res.json())
+      .then(data => {
+        setEducationData(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Error loading education config:', err);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return (
+      <section id="education" className="py-20 bg-gradient-to-b from-black to-gray-900 flex items-center justify-center min-h-screen">
+        <div className="text-gray-400">Loading education section...</div>
+      </section>
+    );
+  }
+
+  if (!educationData) {
+    return (
+      <section id="education" className="py-20 bg-gradient-to-b from-black to-gray-900 flex items-center justify-center min-h-screen">
+        <div className="text-red-400">Error loading education data</div>
+      </section>
+    );
+  }
+
+  const timeline = educationData.timeline.map(item => ({
+    ...item,
+    icon: iconMap[item.icon] || GraduationCap
+  }));
 
   return (
     <section id="education" className="py-20 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden min-h-screen">
@@ -225,7 +233,7 @@ const Education = () => {
                     animate={{ rotate: [0, 360] }}
                     transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
                   >
-                    {item.icon}
+                    {item.icon && <item.icon className={item.iconColor} size={20} />}
                   </motion.div>
                 </motion.div>
 

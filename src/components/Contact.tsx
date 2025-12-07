@@ -1,10 +1,48 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Github, Linkedin, Send, MessageCircle, User, AtSign } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import Toaster from './Toaster';
 
+const iconMap: Record<string, React.ElementType> = {
+  Mail,
+  Phone,
+  MapPin,
+  Github,
+  Linkedin,
+};
+
+interface ContactData {
+  heading: string;
+  description: string;
+  contactInfo: Array<{
+    label: string;
+    icon: string;
+    value: string;
+    href: string | null;
+    color: string;
+    iconColor: string;
+  }>;
+  socialLinks: Array<{
+    name: string;
+    icon: string;
+    href: string;
+    color: string;
+  }>;
+  form: {
+    submitButtonText: string;
+  };
+  messages: {
+    success: string;
+    error: string;
+    configError: string;
+    networkError: string;
+  };
+}
+
 const Contact = () => {
+  const [contactData, setContactData] = useState<ContactData | null>(null);
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -15,6 +53,19 @@ const Contact = () => {
   const [submitStatus, setSubmitStatus] = useState<{success: boolean; message: string} | null>(null);
   const [showToaster, setShowToaster] = useState(false);
   const form = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    fetch('/config/contact.json')
+      .then(res => res.json())
+      .then(data => {
+        setContactData(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Error loading contact config:', err);
+        setLoading(false);
+      });
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -54,21 +105,19 @@ const Contact = () => {
       console.log('Email sent successfully!', result);
       setSubmitStatus({
         success: true,
-        message: '🎉 Message sent successfully! I\'ll get back to you within 24 hours.'
+        message: contactData?.messages.success || '🎉 Message sent successfully!'
       });
       setShowToaster(true);
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
       console.error('Failed to send email:', error);
-      let errorMessage = 'Oops! Something went wrong. Please try again later.';
+      let errorMessage = contactData?.messages.error || 'Error sending message';
       
       if (error instanceof Error) {
         if (error.message.includes('configuration')) {
-          errorMessage = '⚙️ Email service configuration error. Please contact me directly at msaswata15@gmail.com';
+          errorMessage = contactData?.messages.configError || 'Configuration error';
         } else if (error.message.includes('network') || error.message.includes('fetch')) {
-          errorMessage = '🌐 Network error. Please check your connection and try again.';
-        } else {
-          errorMessage = `❌ ${error.message}`;
+          errorMessage = contactData?.messages.networkError || 'Network error';
         }
       }
       
@@ -81,6 +130,27 @@ const Contact = () => {
       setIsSubmitting(false);
     }
   };
+
+  if (loading) {
+    return (
+      <section id="contact" className="py-20 bg-gradient-to-b from-gray-900 to-black flex items-center justify-center min-h-screen">
+        <div className="text-gray-400">Loading contact section...</div>
+      </section>
+    );
+  }
+
+  if (!contactData) {
+    return (
+      <section id="contact" className="py-20 bg-gradient-to-b from-gray-900 to-black flex items-center justify-center min-h-screen">
+        <div className="text-red-400">Error loading contact data</div>
+      </section>
+    );
+  }
+
+  const contactInfo = contactData.contactInfo.map(info => ({
+    ...info,
+    icon: iconMap[info.icon]
+  }));
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -104,33 +174,6 @@ const Contact = () => {
       }
     }
   };
-
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: "Email",
-      value: "msaswata15@gmail.com",
-      href: "mailto:msaswata15@gmail.com",
-      color: "from-blue-500/20 to-blue-600/20",
-      iconColor: "text-blue-400"
-    },
-    {
-      icon: Phone,
-      label: "Phone",
-      value: "+91 7718511341",
-      href: "tel:+917718511341",
-      color: "from-green-500/20 to-green-600/20",
-      iconColor: "text-green-400"
-    },
-    {
-      icon: MapPin,
-      label: "Location",
-      value: "Kolkata, India - 700102",
-      href: null,
-      color: "from-purple-500/20 to-purple-600/20",
-      iconColor: "text-purple-400"
-    }
-  ];
 
   return (
     <section id="contact" className="py-20 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden min-h-screen">
@@ -188,7 +231,7 @@ const Contact = () => {
             transition={{ duration: 0.3 }}
           >
             <MessageCircle className="text-blue-400" size={32} />
-            <h2 className="text-5xl font-bold text-white">Get In Touch</h2>
+            <h2 className="text-5xl font-bold text-white">{contactData.heading}</h2>
           </motion.div>
           <motion.div 
             className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto"
@@ -204,7 +247,7 @@ const Contact = () => {
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
-            Ready to collaborate on your next project? Let's discuss how we can work together to bring your ideas to life.
+            {contactData.description}
           </motion.p>
         </motion.div>
 

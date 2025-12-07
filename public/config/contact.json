@@ -1,0 +1,91 @@
+{
+  "heading": "Get In Touch",
+  "description": "Ready to collaborate on your next project? Let's discuss how we can work together to bring your ideas to life.",
+  "contactInfo": [
+    {
+      "label": "Email",
+      "icon": "Mail",
+      "value": "programmer143143@gmail.com",
+      "href": "mailto:programmer143143@gmail.com",
+      "color": "from-blue-500/20 to-blue-600/20",
+      "iconColor": "text-blue-400"
+    },
+    {
+      "label": "Phone",
+      "icon": "Phone",
+      "value": "+91 XXXXX XXXXX",
+      "href": "tel:+91XXXXXXXXXX",
+      "color": "from-green-500/20 to-green-600/20",
+      "iconColor": "text-green-400"
+    },
+    {
+      "label": "Location",
+      "icon": "MapPin",
+      "value": "Bangluru, India",
+      "href": null,
+      "color": "from-purple-500/20 to-purple-600/20",
+      "iconColor": "text-purple-400"
+    }
+  ],
+  "socialLinks": [
+    {
+      "name": "GitHub",
+      "icon": "Github",
+      "href": "https://github.com/11KAlYAN11",
+      "color": "hover:text-gray-300"
+    },
+    {
+      "name": "LinkedIn",
+      "icon": "Linkedin",
+      "href": "https://www.linkedin.com/in/asam-pavan-kumar-reddy/",
+      "color": "hover:text-blue-400"
+    },
+    {
+      "name": "LeetCode",
+      "icon": "Code",
+      "href": "https://leetcode.com/11KAlYAN11",
+      "color": "hover:text-yellow-400"
+    },
+    {
+      "name": "Twitter",
+      "icon": "Twitter",
+      "href": "https://twitter.com/xxxx",
+      "color": "hover:text-blue-300"
+    }
+  ],
+  "form": {
+    "submitButtonText": "Send a Message",
+    "fields": [
+      {
+        "name": "name",
+        "type": "text",
+        "label": "Full Name",
+        "placeholder": "Your full name",
+        "icon": "User",
+        "required": true
+      },
+      {
+        "name": "email",
+        "type": "email",
+        "label": "Email Address",
+        "placeholder": "your.email@example.com",
+        "icon": "AtSign",
+        "required": true
+      },
+      {
+        "name": "message",
+        "type": "textarea",
+        "label": "Message",
+        "placeholder": "Your message here...",
+        "icon": "MessageCircle",
+        "required": true
+      }
+    ]
+  },
+  "messages": {
+    "success": "🎉 Message sent successfully! I'll get back to you within 24 hours.",
+    "error": "Oops! Something went wrong. Please try again later.",
+    "configError": "Email service configuration error. Please contact directly.",
+    "networkError": "🌐 Network error. Please check your connection and try again."
+  }
+}
